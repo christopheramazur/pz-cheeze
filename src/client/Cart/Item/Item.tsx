@@ -42,6 +42,24 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
         <DialogTitle>
           {item.title}
         </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <img 
+              alt={item.title} 
+              src={item.image}
+              width="100%" 
+              height ="100%"/>
+          </DialogContentText>
+          <DialogContentText>
+            <b>Price:</b> ${item.price}
+          </DialogContentText>
+          <DialogContentText>
+            <b>Description:</b> {item.description}
+          </DialogContentText>
+          <DialogContentText>
+            <b>Category:</b> {item.category}
+          </DialogContentText>
+        </DialogContent>
         <DialogActions>
           <Button 
             onClick={() => setDialogVisible(false)}>
