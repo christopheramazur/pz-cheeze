@@ -14,4 +14,8 @@ context('Cart Actions', () => {
 
   })
 
+  it('Open and close Dialog for item', () => {
+    
+  })
+
 })

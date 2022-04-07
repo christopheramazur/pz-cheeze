@@ -22,9 +22,10 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
   // https://mui.com/components/dialogs/ -- add a dialog to the item wrapper
   const [dialogVisible, setDialogVisible] = useState(false);
 
+  
   return (
+    // i'm able to get the dialog to appear using onClick -- not sure how to use it in wrapper instead of image
     <Wrapper>
-      // i'm able to get the dialog to appear using onClick -- not sure how to use it in wrapper instead of image
       <img src={item.image} alt={item.title} onClick={() => setDialogVisible(true)} />
       <div>
         <h3>{item.title}</h3>
@@ -34,8 +35,19 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
         onClick={() => handleAddToCart(item)}
         data-cy={`add-to-cart-${item.id}`}>Add to cart</Button>
       
-      <Dialog open={dialogVisible} onClose={() => setDialogVisible(false)}>
-        <DialogTitle>{item.title}</DialogTitle>
+      <Dialog 
+        open={dialogVisible} 
+        onClose={() => setDialogVisible(false)}>
+
+        <DialogTitle>
+          {item.title}
+        </DialogTitle>
+        <DialogActions>
+          <Button 
+            onClick={() => setDialogVisible(false)}>
+              Close
+          </Button>
+        </DialogActions>
       </Dialog>
     </Wrapper>
   );
