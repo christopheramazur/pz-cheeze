@@ -24,7 +24,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
 
   return (
     <Wrapper>
-
+      // i'm able to get the dialog to appear using onClick -- not sure how to use it in wrapper instead of image
       <img src={item.image} alt={item.title} onClick={() => setDialogVisible(true)} />
       <div>
         <h3>{item.title}</h3>
