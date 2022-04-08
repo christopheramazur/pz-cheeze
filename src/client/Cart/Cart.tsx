@@ -1,6 +1,7 @@
 import CartItem from './CartItem/CartItem';
 import { Wrapper } from './Cart.styles';
 import { CartItemType } from '../App';
+import { Button } from '@material-ui/core';
 
 type Props = {
   cartItems: CartItemType[];
@@ -12,6 +13,11 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
   const calculateTotal = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount * item.price, 0);
 
+  // collect item data as JSON & POST with collection to backend -- requires backend route 
+  const purchaseItemsInCart = (items: CartItemType[]) => {
+    console.log(cartItems)
+  }
+  
   return (
     <Wrapper>
       <h2>Your Shopping Cart</h2>
@@ -25,6 +31,11 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
         />
       ))}
       <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
+
+      <Button 
+        onClick={() => purchaseItemsInCart(cartItems)}>
+        <b>Purchase</b>
+      </Button>
     </Wrapper>
   );
 };
