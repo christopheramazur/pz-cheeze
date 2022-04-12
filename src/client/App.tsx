@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 // Components
 import Item from './Cart/Item/Item';
 import Cart from './Cart/Cart';
+import RecentPurchaseItem from './RecentPurchases/RecentPurchaseItem';
 import Drawer from '@material-ui/core/Drawer';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
@@ -12,6 +13,7 @@ import Badge from '@material-ui/core/Badge';
 // Styles
 import { Wrapper, StyledButton, StyledAppBar, HeaderTypography } from './App.styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import RecentPurchase from './RecentPurchases/RecentPurchase';
 // Types
 export type CartItemType = {
   id: number;
@@ -30,6 +32,7 @@ const getCheeses = async (): Promise<CartItemType[]> =>
 const App = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([] as CartItemType[]);
+  const [recentPurchaseOpen, setRecentPurchaseOpen] = useState(false);
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'cheeses',
     getCheeses
@@ -83,7 +86,7 @@ const App = () => {
             justify="space-between"
             alignItems="center"
           >
-            <StyledButton>
+            <StyledButton onClick={() => setRecentPurchaseOpen(true)}>
               <RestoreIcon />
               <Typography variant="subtitle2">
                 Recent Purchases
@@ -116,6 +119,12 @@ const App = () => {
           cartItems={cartItems}
           addToCart={handleAddToCart}
           removeFromCart={handleRemoveFromCart}
+        />
+      </Drawer>
+
+      <Drawer anchor='right' open={recentPurchaseOpen} onClose={() => setRecentPurchaseOpen(false)}>
+        <RecentPurchase
+          cartItems={cartItems}
         />
       </Drawer>
 

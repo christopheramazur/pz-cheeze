@@ -13,9 +13,21 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
   const calculateTotal = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount * item.price, 0);
 
-  // collect item data as JSON & POST with collection to backend -- requires backend route 
+  // collect item data as JSON & POST with collection to backend
   const purchaseItemsInCart = (items: CartItemType[]) => {
-    console.log(cartItems)
+    const payload = JSON.stringify(items);
+    console.log("Items sent to purchase: \n", payload)
+    
+    const purchaseRequest = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: payload
+    }
+
+    // TBD: error handling, async
+    console.log(fetch('api/submit_purchase', purchaseRequest));
   }
   
   return (
